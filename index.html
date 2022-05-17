@@ -98,6 +98,11 @@
 
                     boxList = null, _x = null, _y = null, selDiv = null, startX = null, startY = null, evt = null;
                 }
+
+                // 按其他地方重置
+                boxList.forEach((item, index) => {
+                    item.checked = false;
+                })
             }
         })();
     </script>
