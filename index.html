@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,26 +13,40 @@
         }
     </style>
 </head>
+
 <body>
     <div id="app">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
-        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
+        <input type="checkbox" class="boxCheck"><input type="checkbox" class="boxCheck"><input type="checkbox"
+            class="boxCheck">
     </div>
 
     <script>
         (function () {
-            document.onmousedown = function() {
-                let boxList = [];
+            document.onmousedown = function (event) {
+                if (event.button == 0) {
+                    let boxList = [];
                 // getElementsByTagName返回带有指定标签名的对象的集合
                 let boxes = document.getElementsByTagName("input");
                 for (let i = 0; i < boxes.length; i++) {
@@ -42,7 +57,7 @@
                 let evt = window.event || arguments[0];
                 // 存放鼠标点击初始位置
                 let startX = (evt.x || evt.clientX);
-                let startY = (evt.y || evt.clientY);  
+                let startY = (evt.y || evt.clientY);
 
                 // 创建一个框选元素
                 let selDiv = document.createElement("div");
@@ -60,9 +75,9 @@
                 let _x = null;
                 let _y = null;
                 // 移动鼠标
-                document.onmousemove = function() {
+                document.onmousemove = function () {
                     evt = window.event || arguments[0];
-                    if (isSelect) {
+                    if (isSelect || evt.button == 1) {
                         if (selDiv.style.display == "none") {
                             selDiv.style.display = "";
                         }
@@ -84,6 +99,8 @@
 
                             if (sl > _l && st > _t && boxList[i].offsetLeft < _l + _w && boxList[i].offsetTop < _t + _h) {
                                 boxList[i].checked = true;
+                            } else {
+                                boxList[i].checked = false; // 解决虚线框从大变小check变少
                             }
                         }
                     }
@@ -104,7 +121,9 @@
                 boxList.forEach((item, index) => {
                     item.checked = false;
                 })
+                }
             }
+
         })();
 
         function clearEventBubble(evt) {
@@ -120,4 +139,5 @@
         }
     </script>
 </body>
+
 </html>
