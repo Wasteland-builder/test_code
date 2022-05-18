@@ -87,6 +87,7 @@
                             }
                         }
                     }
+                    clearEventBubble(evt);
                 }
 
                 // 放开鼠标，选框消失
@@ -105,6 +106,18 @@
                 })
             }
         })();
+
+        function clearEventBubble(evt) {
+            // stopPropagation()不再派发事件。终止事件在传播过程的捕获、目标处理或起跑阶段进一步传播
+            if (evt.stopPropagation)
+                evt.stopPropagation();
+            else
+                evt.cancelBubble = true;  // 阻止该事件的进一步冒泡
+            if (evt.preventDefault)
+                evt.preventDefault();   // 取消事件的默认动作
+            else
+                evt.returnValue = false;
+        }
     </script>
 </body>
 </html>
